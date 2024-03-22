@@ -25,8 +25,6 @@ This release have been tested with:
 Using MIPI CSI-2 cameras requires setting up your embedded board.
 The SK-TDA4VM board provides 2 RPi headers for camera connection. <br/>
 You can find our camera products with RPi header here：[MIPI-CSI2 Camera Module](https://www.technexion.com/?s=RPI15&post_type=product)\
-![S__60_720p](https://github.com/TechNexion-Vision/ti_evk_camera/assets/57210123/7c4a5deb-a138-456f-9716-cf6ed082f93a)<br/>
-Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
 <br/><br/>
 Following the [README] in branch to get started with the SD card image or the precompiled kernel including camera module driver.
 
