@@ -22,7 +22,7 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
   [tisdk-edgeai-image-j721e-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-4K6R4tqhZI/09.01.00.06/tisdk-edgeai-image-j721e-evm.wic.xz)
       (Version: 09.01.00.06 Release date: 08 Dec 2023)<br/>
   `xz -d tisdk-edgeai-image-j721e-evm.wic.xz`
-  
+
 + **Micro-SD Card** <br/>
   Micro-SD Card capacity must be higher 16GB and then flash the image.<br/>
   `sudo dd of=/dev/<sd card> if=tisdk-edgeai-image-j721e-evm.wic bs=1M status=progress`
@@ -30,27 +30,27 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
 ## Driver Installation instructions
 
 **1. Download the camera driver and device tree blobs.**
-  ```
+  ```shell
   $ git clone git@github.com:TechNexion-Vision/tn-ti_6.1.46_09.01.00.006.git
   $ cd ti_evk_camera/
   ~/ti_evk_camera$ git checkout tn-ti_6.1.46_09.01.00.006
   ```
 **2.  Copy to your kernel source code.**
-  ```
+  ```shell
   ~/ti_evk_camera$ mv -r driver/media/i2c/tevs/ <fatch_kernel_folder>/driver/media/i2c/
   ~/ti_evk_camera$ mv arch/arm64/boot/dts/ti/k3-j721e-sk-tevs.dtso <fatch_kernel_folder>/arch/arm64/boot/dts/ti/
   ```
   **3.  Modify makefile to add driver**
-  ```
+  ```shell
   $ cd <fatch_kernel_folder>/driver/media/i2c/
   ~/<fatch_kernel_folder>/driver/media/i2c/$ vi Makefile
   ```
   Add this line in Makefile.
-  ```
+  ```shell
   obj-$(CONFIG_VIDEO_TEVS) += tevs/
   ```
   Modify Kconfig to add camera config
-  ```
+  ```shell
   ~/<fatch_kernel_folder>/driver/media/i2c/$ vi Kconfig
   ```
   Add this part under "Camera sensor devices" menu in Kconfig.
@@ -69,7 +69,7 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
 
   **4.  Modify makefile to add device tree.**
 
-  ```
+  ```shell
   $ cd <fatch_kernel_folder>/arch/arm64/boot/dts/ti/
   ~/<fatch_kernel_folder>/arch/arm64/boot/dts/ti/$ vi Makefile
   ```
@@ -80,7 +80,7 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
 <br/>
 
   **5.  Compile the kernel & module driver**
-  
+
   Finally you can start compile your new Image files, then copy and replace the Image files and add camera dtb overlay file in the SD card.<br/>
 <br/>
   > [!NOTE]
@@ -88,7 +88,7 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
   > `name_overlays=ti/k3-j721e-edgeai-apps.dtbo ti/k3-j721e-sk-tevs.dtbo`
 
 ## Instructions for testing camera
-  
+
 1. Connect debug console cable to NXP 8MPLUSLPD4-EVK.
 2. Power on the board.
    The display will shown an Edge AI demo wallpaper as below.<br/>
@@ -99,33 +99,92 @@ Fig. 1.1 TechNexion camera module connection with TDA4VM Starter Kit for Edge AI
   > You won't see it the next time reboot.
 
   Checking whether camera have been link via v4l2 control command :
-  ```
+  ```shell
   $ v4l2-ctl --list-device
   ```
-  Get the device number of camera capture device.
+  Get the device number of camera capture device
+  ```shell
+  j721e-csi2rx (platform:4500000.ticsi2rx):
+        /dev/video2
+        /dev/video3
+        /dev/video4
+        /dev/video5
+        /dev/video6
+        /dev/video7
+        /dev/video8
+        /dev/video9
+        /dev/video10
+        /dev/video11
+        /dev/video12
+        /dev/video13
+        /dev/video14
+        /dev/video15
+        /dev/video16
+        /dev/video17
+        /dev/media0
+
+  TI-CSI2RX (platform:4510000.ticsi2rx):
+          /dev/media1
+
+  vxd-dec (platform:vxd-dec):
+          /dev/video1
+
+  vxe-enc (platform:vxe-enc):
+          /dev/video0
   ```
+  or if you connect on CAM2 port will see as below:
+  ```shell
+  TI-CSI2RX (platform:4500000.ticsi2rx):
+          /dev/media0
+
   j721e-csi2rx (platform:4510000.ticsi2rx):
         /dev/video2
+        /dev/video3
+        /dev/video4
+        /dev/video5
+        /dev/video6
+        /dev/video7
+        /dev/video8
+        /dev/video9
+        /dev/video10
+        /dev/video11
+        /dev/video12
+        /dev/video13
+        /dev/video14
+        /dev/video15
+        /dev/video16
+        /dev/video17
+        /dev/media1
+
+  vxd-dec (platform:vxd-dec):
+          /dev/video1
+
+  vxe-enc (platform:vxe-enc):
+          /dev/video0
   ```
-  or
-  ```
-  j721e-csi2rx (platform:4510000.ticsi2rx):
-        /dev/video2
-  ```
-  ![image](https://github.com/TechNexion-Vision/ti_evk_camera/assets/57210123/a36e193c-93cc-4a9e-8ea5-8b4a64146465)<br/>
-  Fig. 1.3 Camera connected on CMA2 port<br/>
+
   <br/>
   You also can check boot log to find camera is probing success<br/>
-  ![image](https://github.com/TechNexion-Vision/ti_evk_camera/assets/57210123/2a4d31be-3ba9-4d3b-9ca8-6e9b44df4c08)<br/>
-  Fig. 1.4 dmesg and find camera's boot log<br/>
+
+  ```shell
+  $ dmesg|grep "probe success"
+  ```
+
+  the message similar to the following:<br/>
+
+
+  ```shell
+  [    8.691258] tevs 6-0048: probe success
+  ```
+
   <br/>
   Specify the capture device you just get and start gstreamer to get video stream on screen :<br/>
-  ` gst-launch-1.0 v4l2src device=/dev/video2 io-mode=2 ! video/x-raw,width=640,height=480 ! waylandsink`
-  <br/>
-  <br/>
-  <br/>
 
-  
 
-  
-  
+  ```shell
+  $ gst-launch-1.0 v4l2src device=/dev/video2 io-mode=2 ! video/x-raw,width=640,height=480 ! waylandsink
+  ```
+
+  <br/>
+  <br/>
+  <br/>
