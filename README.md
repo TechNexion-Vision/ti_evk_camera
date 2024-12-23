@@ -1,14 +1,14 @@
 # TI TDA4VM Camera Driver
 
-[![TEVS_Banner](https://github.com/user-attachments/assets/02219e99-b031-4a44-84c3-75277ed1a4ec)](https://www.technexion.com/products/embedded-vision/)
+[![TEVS Banner](https://github.com/user-attachments/assets/02219e99-b031-4a44-84c3-75277ed1a4ec)](https://www.technexion.com/products/embedded-vision/)
 
 
-[![Producer: Technexion](https://img.shields.io/badge/Producer-Technexion-blue.svg)](https://www.technexion.com)
+[![Producer: TechNexion](https://img.shields.io/badge/Producer-Technexion-blue.svg)](https://www.technexion.com)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 <br/><br/>
 
 ## Overview
-Driver has been developed by TechNexion as an initiative in order to bootup Technexion MIPI-CSI2 camera modules on Ti starter kit.
+Driver has been developed by TechNexion as an initiative in order to bootup TechNexion MIPI-CSI2 camera modules on Ti starter kit.
 
 ## Prerequisites
 
@@ -24,7 +24,8 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
    | --- | --- | --- |
    | SK-AM62	 | TEV-RPI15 Adaptor	 | [TechNexion Camera EVK RPI15](https://www.technexion.com/?s=RPI15&post_type=product) |
    | SK-AM62A-LP	 | TEV-RPI22 Adaptor | [TechNexion Camera EVK RPI22](https://www.technexion.com/?s=RPI22&post_type=product) |
-   | SK-TDA4VM	 | TEV-RPI15 Adaptor	 | [TechNexion Camera EVK RPI15](https://www.technexion.com/?s=RPI15&post_type=product) |
+    | SK-TDA4VM	 | TEV-RPI15 Adaptor	 | [TechNexion Camera EVK RPI15](https://www.technexion.com/?s=RPI15&post_type=product) |
+
 
    Be careful with the RPI22 adaptor board connector, which is compatible with the reverse orientation pin define.
    <br/>
@@ -32,24 +33,20 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
    [![Watch the video](https://img.youtube.com/vi/xkC3rHdgO_I/hqdefault.jpg)](https://youtu.be/xkC3rHdgO_I?si=UIqmwzrvaCOmkBf4)
    <br/>
    **Fig. 1.1** The TEV-RPI22 adaptor connection with SK-AM62A-LP Starter Kit.
-   <br/><br/>
-   The SK-TDA4VM board provides 2 RPi headers for camera connection.<br/>
-   <img src="https://github.com/TechNexion-Vision/ti_evk_camera/assets/57210123/7c4a5deb-a138-456f-9716-cf6ed082f93a" width="50%"><br/>
-   **Fig. 1.2** The TEV-RPI15 adaptor connection with SK-TDA4VM Starter Kit for Edge AI.
-   <br/><br/>
+   <br/>
 3. ### **Yocto Pre-built image** <br/>
    The release driver have been verified with those ti-processor-sdk-linux version:
    * For **SK-AM62** :<br/>
-    [tisdk-default-image-am62xx-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-PvdSyIiioq/09.01.00.08/tisdk-default-image-am62xx-evm.wic.xz)
-      <sub>(Version: 09.01.00.08 Release date: 18 Dec 2023)</sub><br/>
+    [tisdk-default-image-am62xx-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-PvdSyIiioq/10.00.07.04/tisdk-default-image-am62xx-evm.rootfs.wic.xz)
+      <sub>(Version: 10.00.07.04 Release date: 14 Aug 2024)</sub><br/>
     `xz -d tisdk-default-image-am62xx-evm.wic.xz`<br/>
    * For **SK-AM62A-LP** :<br/>
-    [tisdk-edgeai-image-am62axx-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-D37Ls3JjkT/09.01.00.07/tisdk-edgeai-image-am62axx-evm.wic.xz)
-      <sub>(Version: 09.01.00.07 Release date: 18 Dec 2023)</sub><br/>
+    [tisdk-edgeai-image-am62axx-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-D37Ls3JjkT/10.00.00.08/tisdk-edgeai-image-am62a-evm.wic.xz)
+      <sub>(Version: 10.00.00.08 Release date: 19 Aug 2024)</sub><br/>
      `xz -d tisdk-edgeai-image-am62axx-evm.wic.xz`<br/>
    * For **SK-TDA4VM** :<br/>
-    [tisdk-edgeai-image-j721e-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-4K6R4tqhZI/09.01.00.06/tisdk-edgeai-image-j721e-evm.wic.xz)
-      <sub>(Version: 09.01.00.06 Release date: 08 Dec 2023)</sub><br/>
+    [tisdk-edgeai-image-j721e-evm.wic.xz](https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-4K6R4tqhZI/10.01.00.04/tisdk-edgeai-image-j721e-evm.wic.xz)
+      <sub>(Version: 10.01.00.04 Release date: 18 Dec 2024)</sub><br/>
      `xz -d tisdk-edgeai-image-j721e-evm.wic.xz`<br/>
 
 > [!NOTE]
@@ -64,19 +61,24 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
 
 1. ### **Download the camera driver and device tree blobs.**
     ```shell
-    $ git clone git@github.com:TechNexion-Vision/tn-ti_6.1.46_09.01.00.006.git
+    $ git clone git@github.com:TechNexion-Vision/ti_evk_camera.git
     $ cd ti_evk_camera/
-    ~/ti_evk_camera$ git checkout tn-ti_6.1.46_09.01.00.006
+    ~/ti_evk_camera$ git checkout tn-ti_6.6.32_10.00
     ```
 2. ### **Copy to your kernel source code.**
     ```shell
-    ~/ti_evk_camera$ mv -r driver/media/i2c/tevs/ <fatch_kernel_folder>/driver/media/i2c/
-    ~/ti_evk_camera$ mv arch/arm64/boot/dts/ti/k3-j721e-sk-tevs.dtso <fatch_kernel_folder>/arch/arm64/boot/dts/ti/
+    ~/ti_evk_camera$ mv -r driver/media/i2c/tevs/ <fetch_kernel_folder>/driver/media/i2c/
+    # For SK-AM62X
+    ~/ti_evk_camera$ mv arch/arm64/boot/dts/ti/k3-am625-sk-csi2-tevs.dtso <fetch_kernel_folder>/arch/arm64/boot/dts/ti/
+    # For SK-AM62A
+    ~/ti_evk_camera$ mv arch/arm64/boot/dts/ti/k3-am62a7-sk-csi2-tevs.dtso <fetch_kernel_folder>/arch/arm64/boot/dts/ti/
+    # For SK-TDA4VM
+    ~/ti_evk_camera$ mv arch/arm64/boot/dts/ti/k3-j721e-sk-tevs.dtso <fetch_kernel_folder>/arch/arm64/boot/dts/ti/
     ```
 3. ### **Modify makefile to add driver**
     ```shell
-    $ cd <fatch_kernel_folder>/driver/media/i2c/
-    ~/<fatch_kernel_folder>/driver/media/i2c/$ vi Makefile
+    $ cd <fetch_kernel_folder>/driver/media/i2c/
+    ~/<fetch_kernel_folder>/driver/media/i2c/$ vi Makefile
     ```
     Add this line in Makefile.
     ```shell
@@ -84,7 +86,7 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
     ```
     Modify Kconfig to add camera config
     ```shell
-    ~/<fatch_kernel_folder>/driver/media/i2c/$ vi Kconfig
+    ~/<fetch_kernel_folder>/driver/media/i2c/$ vi Kconfig
     ```
     Add this part under "Camera sensor devices" menu in Kconfig.
     ```
@@ -103,14 +105,14 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
 4. ### **Modify makefile to add device tree.**
 
     ```shell
-    $ cd <fatch_kernel_folder>/arch/arm64/boot/dts/ti/
-    ~/<fatch_kernel_folder>/arch/arm64/boot/dts/ti/$ vi Makefile
+    $ cd <fetch_kernel_folder>/arch/arm64/boot/dts/ti/
+    ~/<fetch_kernel_folder>/arch/arm64/boot/dts/ti/$ vi Makefile
     ```
     Add this line in Makefile.
-    ```
-    #For SK-AM62X
+    ```shell
+    # For SK-AM62X
     dtb-$(CONFIG_ARCH_K3) += k3-am625-sk-csi2-tevs.dtbo
-    #For SK-AM62A
+    # For SK-AM62A
     dtb-$(CONFIG_ARCH_K3) += k3-am62a7-sk-csi2-tevs.dtbo
     #For SK-TDA4VM
     dtb-$(CONFIG_ARCH_K3) += k3-j721e-sk-tevs.dtbo
@@ -118,18 +120,17 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
 
 5. ### **Compile the kernel & module driver**
   
-    Finally you can start compile your new Image files, then copy and replace the Image files and add camera dtb overlay file in the SD card.<br/>
-
-> [!NOTE]
-> You need specifying the SD card image of dtb overlay file in `/run/media/BOOT-mmcblk1p1/uEnv.txt` as below,<br/>
-> ```
-> #For SK-AM62X
->   name_overlays= k3-am625-sk-csi2-tevs.dtbo
-> #For SK-AM62A
->   name_overlays= k3-am62a7-sk-csi2-tevs.dtbo
-> #For SK-TDA4VM
->   name_overlays=ti/k3-j721e-edgeai-apps.dtbo ti/k3-j721e-sk-tevs.dtbo
-> ```
+    Finally you can start compile your new Image files, then copy and replace the Image files and add camera dtb overlay file in the SD card.
+    > [!NOTE]
+    > You need specifying the SD card image of dtb overlay file in `/run/media/BOOT-mmcblk1p1/uEnv.txt` as below :<br/>
+    > ```shell
+    > # For SK-AM62X
+    >   name_overlays= ti/k3-am625-sk-csi2-tevs.dtbo
+    > # For SK-AM62A
+    >   name_overlays= ti/k3-am62a7-sk-csi2-tevs.dtbo
+    > # For SK-TDA4VM
+    >   name_overlays= ti/k3-j721e-edgeai-apps.dtbo ti/k3-j721e-sk-tevs.dtbo
+    > ```
 
 ## Instructions for Testing Camera
 
