@@ -53,7 +53,7 @@ Driver has been developed by TechNexion as an initiative in order to bootup Tech
      `xz -d tisdk-edgeai-image-j721e-evm.wic.xz`<br/>
 
 > [!NOTE]
-> If you don't have any specific driver need, you can using **[TechNexion Pre-built Image](https://developer.technexion.com/beta/docs/ti-sk-kit-tevs-camera-usage-guide#using-technexion-prebuilt-image)**<br/>
+> If you don't have any specific driver need, you can using **[TechNexion Pre-built Image](https://tn-docusaurus.vercel.app/docs/embedded-vision/tevs/usage-guides/ti/ti-sk-kit-tevs-camera-usage-guide)**<br/>
 > Skip step of driver install and start to using camera quickly !<br/>
 
 4. ### **Micro-SD Card** <br/>
