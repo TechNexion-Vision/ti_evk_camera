@@ -21,7 +21,7 @@ You can find our camera products here：[TechNexion Embedded Vision Solutions](h
 
 ## Supported carrier boards and Get started
 
-You can follow [TEVS Camera Usage Guide for Texas Instrument](https://tn-docusaurus.vercel.app/docs/embedded-vision/tevs/usage-guides/ti/) and select the carrier board which you are using, get start to build yocto or use the pre-build kernel image including camera module driver.
+You can follow [TEVS Camera Usage Guide for Texas Instrument](https://developer.technexion.com/docs/embedded-vision/tevs/usage-guides/ti/) and select the carrier board which you are using, get start to build yocto or use the pre-build kernel image including camera module driver.
 
   <br/>
   <br/>
